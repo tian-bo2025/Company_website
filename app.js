@@ -1,51 +1,37 @@
-const express = require('express');
-const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const indexRouter = require('./routes/index');
+const express = require("express");
+const path = require("path");
+const session = require("express-session");
+const SQLiteStore = require("connect-sqlite3")(session);
+const bodyParser = require("body-parser");
 
 const app = express();
 
-// 端口
-const PORT = process.env.PORT || 3000;
+// 设置视图引擎
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-// 视图和静态文件
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')));
+// 中间件
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
-// body解析
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-// session配置
-app.use(session({
-    secret: '宝诗珠宝123',
+// 会话配置（注意：MemoryStore 仅限开发环境）
+app.use(
+  session({
+    store: new SQLiteStore({ db: "sessions.sqlite" }),
+    secret: "yoursecretkey",
     resave: false,
-    saveUninitialized: true,
-}));
-
-// SQLite数据库路径（绝对路径）
-const dbPath = path.resolve(__dirname, 'mysite.db');
-const db = new sqlite3.Database(dbPath, (err) => {
-    if (err) {
-        console.error('数据库连接失败:', err.message);
-    } else {
-        console.log('数据库已连接:', dbPath);
-    }
-});
-
-// 将db挂载到req
-app.use((req, res, next) => {
-    req.db = db;
-    next();
-});
+    saveUninitialized: false,
+  })
+);
 
 // 路由
-app.use('/', indexRouter);
+const indexRouter = require("./routes/index");
+app.use("/", indexRouter);
 
-// 启动
+// 启动服务
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`服务器运行在 http://localhost:${PORT}`);
+  console.log(`服务器运行在 http://localhost:${PORT}`);
 });
+
+module.exports = app;
