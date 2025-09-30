@@ -1,12 +1,15 @@
 const express = require("express");
 const path = require("path");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-// 设置视图引擎
+// 静态文件
+app.use(express.static(path.join(__dirname, "public")));
+
+// 模板引擎
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -16,31 +19,18 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   session({
-    secret: "your_secret_key", // 可以换成环境变量 process.env.SESSION_SECRET
+    secret: "keyboard cat",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
   })
 );
-
-// 静态资源
-app.use(express.static(path.join(__dirname, "public")));
 
 // 路由
 const indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
-// 错误处理（防止 502）
-app.use((req, res, next) => {
-  res.status(404).send("页面未找到 (404)");
-});
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("服务器内部错误 (500)");
-});
-
-// 监听 Railway 提供的端口
+// 监听端口
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`服务器运行在 http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
