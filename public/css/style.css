@@ -1,0 +1,167 @@
+/* ----------------- 全局样式 ----------------- */
+body {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    margin: 0;
+    background: #f9fafc;
+    color: #333;
+}
+
+/* ----------------- 头部 ----------------- */
+header {
+    background: linear-gradient(90deg,#1769ff,#4a90e2);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 700;
+}
+
+/* ----------------- 导航栏 ----------------- */
+nav {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    align-items: center;
+}
+
+.nav-left a, .nav-right a {
+    text-decoration: none;
+    color: #1769ff;
+    font-weight: 600;
+    margin-right: 15px;
+    position: relative;
+}
+
+.nav-left a::after, .nav-right a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #1769ff;
+    transition: width 0.3s;
+}
+
+.nav-left a:hover::after, .nav-right a:hover::after {
+    width: 100%;
+}
+
+/* ----------------- “我的”按钮 ----------------- */
+.my-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #1769ff;  /* 蓝色背景 */
+    color: #ffffff;             /* 白色文字 */
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.my-button:hover {
+    background-color: #0d47a1; /* 悬停深蓝色背景 */
+    color: #ffffff;             /* 文字保持白色 */
+}
+
+/* ----------------- 主体 ----------------- */
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 15px 50px;
+    min-height: 70vh;
+}
+
+section h2 {
+    color: #1769ff;
+    margin-bottom: 15px;
+}
+
+/* ----------------- 页脚 ----------------- */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    background: #f0f4ff;
+    color: #444;
+    font-weight: 600;
+}
+
+/* ----------------- 上方个人信息卡片 ----------------- */
+.user-info-card {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(23,105,255,0.2);
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+/* ----------------- 下方选择性卡片容器 ----------------- */
+.card-options {
+    display: flex;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 20px auto;
+    gap: 15px;
+}
+
+/* ----------------- 每个选择卡片 ----------------- */
+.option-card {
+    flex: 1;
+    background: white;
+    text-align: center;
+    padding: 25px 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: #1769ff;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.option-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* ----------------- 登录/注册框样式 ----------------- */
+.box {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.box h2 {
+    text-align: center;
+}
+
+.box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border:1px solid #ccc;
+    border-radius: 5px;
+}
+
+.box button {
+    width: 100%;
+    padding: 10px;
+    background:#1769ff;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.box button:hover {
+    background:#0d47a1;
+}

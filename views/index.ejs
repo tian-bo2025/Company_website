@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>首页 - 某某公司</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        nav a.admin-button {
+            padding: 8px 14px;
+            background: orange;
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        nav a.admin-button:hover { background: #ff9900; }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-left">
+        <a href="index.html">首页</a>
+        <a href="#productSection">产品展示</a>
+        <a href="#contactSection">联系我们</a>
+    </div>
+    <div class="nav-right">
+        <a href="/profile" class="my-button">我的</a>
+        <% if(user && user.role==='admin'){ %>
+            <a href="/admin" class="admin-button">管理员设置</a>
+        <% } %>
+    </div>
+</nav>
+<main>
+    <h1>欢迎<%= user ? user.username : '游客' %></h1>
+</main>
+</body>
+</html>

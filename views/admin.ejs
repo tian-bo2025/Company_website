@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员设置 - 某某公司</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body { display: flex; min-height: 100vh; font-family: "Microsoft YaHei", Arial, sans-serif; margin: 0; background: #f9fafc; }
+        nav.sidebar { width: 220px; background: #1769ff; color: white; padding-top: 20px; flex-shrink: 0; }
+        nav.sidebar ul { list-style: none; padding: 0; }
+        nav.sidebar li { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        nav.sidebar li:hover { background: rgba(255,255,255,0.1); }
+        nav.sidebar li.active { background: rgba(255,255,255,0.2); font-weight: bold; }
+        main.admin-content { flex-grow: 1; padding: 20px; }
+        h2 { color: #1769ff; margin-top: 0; }
+        .section-card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        button.action-btn { padding: 8px 12px; margin: 5px 0; background: #1769ff; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        button.action-btn:hover { background: #0d47a1; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<!-- 左侧树状导航 -->
+<nav class="sidebar">
+    <ul>
+        <li class="nav-item active" data-section="userManagement">人员管理</li>
+        <li class="nav-item" data-section="contentReview">内容审核</li>
+        <li class="nav-item" data-section="systemLogs">系统日志</li>
+    </ul>
+</nav>
+
+<!-- 右侧内容区 -->
+<main class="admin-content">
+    <!-- 人员管理 -->
+    <section id="userManagement" class="section-card">
+        <h2>人员管理</h2>
+        <p>这里显示成员列表，点击按钮可删除成员。</p>
+        <button class="action-btn">删除成员（示例）</button>
+    </section>
+
+    <!-- 内容审核 -->
+    <section id="contentReview" class="section-card hidden">
+        <h2>内容审核</h2>
+        <p>审核他人提交的物品图片和评论。</p>
+        <button class="action-btn">删除他人图片（示例）</button>
+        <button class="action-btn">删除评论（示例）</button>
+    </section>
+
+    <!-- 系统日志 -->
+    <section id="systemLogs" class="section-card hidden">
+        <h2>系统日志</h2>
+        <p>显示注册或登录记录。</p>
+        <button class="action-btn">刷新日志（示例）</button>
+    </section>
+</main>
+
+<script>
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.section-card');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // 切换激活状态
+            navItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            // 显示对应内容
+            sections.forEach(sec => {
+                if(sec.id === item.dataset.section){
+                    sec.classList.remove('hidden');
+                } else {
+                    sec.classList.add('hidden');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
